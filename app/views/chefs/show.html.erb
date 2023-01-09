@@ -1,8 +1,10 @@
-<h1><%= @chef.name %><h1>
+<h1><%= @chef.name %></h1>
+
+<%= link_to 'Ingredients', "/chefs/#{@chef.id}/ingredients" %>
 
 <h3>Dishes</h3>
 <% @chef.dishes.each do |dish| %>
-    <%= dish.name %>
+    <p><%= dish.name %></p>
 <% end %>
 
 <%= form_with url: "/chefs/#{@chef.id}", method: :patch, local: true do |form| %>
