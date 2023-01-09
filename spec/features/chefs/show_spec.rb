@@ -53,5 +53,24 @@ RSpec.describe 'Chef show page' do
                 expect(page).to have_content(@dish_3.name)
             end
         end
+
+        it 'has a link to view a list of all ingredients used by this chef' do
+            visit "/chefs/#{@chef_1.id}"
+
+            expect(page).to have_link('Ingredients')
+
+            click_link ('Ingredients')
+
+            expect(current_path).to eq("/chefs/#{@chef_1.id}/ingredients")
+        end
+    end
+
+    describe 'Chef ingredient index' do
+        it 'has a list of all ingredients used by this chef' do
+            visit "/chefs/#{@chef_1.id}/ingredients"
+
+            expect(page).to have_content(@chef_1.ingredients.first.name)
+            expect(page).to have_content(@chef_1.ingredients.last.name)
+        end
     end
 end
